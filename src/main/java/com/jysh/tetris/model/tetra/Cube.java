@@ -1,5 +1,8 @@
 package com.jysh.tetris.model.tetra;
 
+/**
+ * tetra的一个块，一个tetra四个快
+ */
 public class Cube {
     private int x;
     private int y;

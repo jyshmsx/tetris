@@ -5,11 +5,15 @@ import static com.jysh.tetris.model.tetra.Board.BOARD_WIDTH;
 
 import java.util.Random;
 
+/**
+ *
+ */
 public class TetraBoard {
 
     private Tetra tetra;
     private Board board;
     private Tetra nextTetra;
+
 
     public TetraBoard(){
         this.board = new Board();
@@ -18,6 +22,9 @@ public class TetraBoard {
         this.randomSetNextTetra();
     }
 
+    /**
+     * 重新设置board, tetra, nextTetra
+     */
     public void reStart(){
         this.board = new Board();
         this.randomSetNextTetra();
@@ -25,6 +32,9 @@ public class TetraBoard {
         this.randomSetNextTetra();
     }
 
+    /**
+     * 若tetra可以右移，右移
+     */
     public void setTetraMoveRight(){
         Tetra tetra = this.tetra.getMoveRight();
         if(this.findInBoard(tetra)){
@@ -32,6 +42,9 @@ public class TetraBoard {
         }
     }
 
+    /**
+     * 若tetra可以左移，左移
+     */
     public void setTetraMoveLeft(){
         Tetra tetra = this.tetra.getMoveLeft();
         if(this.findInBoard(tetra)){
@@ -39,6 +52,9 @@ public class TetraBoard {
         }
     }
 
+    /**
+     * 若tetra可以右旋转，右旋
+     */
     public void setTetraRotateRight(){
         Tetra tetra = this.tetra.getRotateRight();
         if(this.findInBoard(tetra)){
@@ -46,6 +62,10 @@ public class TetraBoard {
         }
     }
 
+    /**
+     * 若tetra可以下落，下落
+     * 若不可下落，切换方块，查询消行，查询失败
+     */
     public void setTetraMoveDown(){
         Tetra tetra = this.tetra.getMoveDown();
         if(this.findInBoard(tetra)){
@@ -57,6 +77,11 @@ public class TetraBoard {
         }
     }
 
+    /**
+     * 在板上对传入的tetra进行是否处于固定位置的查找，若是，返回false；
+     * @param tetra
+     * @return
+     */
     public boolean findInBoard(Tetra tetra){
         for(Cube cube : tetra.getCubes()){
             if(board.getPlaceholder(cube.getX(), cube.getY())){
@@ -66,6 +91,9 @@ public class TetraBoard {
         return true;
     }
 
+    /**
+     * 查询是否失败，即board中最高行（0行(列，行)）有值为true的
+     */
     public void checkLose(){
         for(int i = 0; i < BOARD_WIDTH; i++){
             if(this.board.getPlaceholder(i, 0)){
@@ -86,16 +114,25 @@ public class TetraBoard {
         return this.nextTetra;
     }
 
-    public void stopTetra(){    //鍋滄tetra
+    /**
+     * 切换方块
+     */
+    public void stopTetra(){
         this.setTetraInBoard();
         this.tetra = nextTetra;
         this.randomSetNextTetra();
     }
 
+    /**
+     * 固定当前tetra至board
+     */
     public void setTetraInBoard(){  //灏嗗綋鍓嶇殑tetra鐨勫�煎浐瀹氬湪board涓�
         board.setPlaceholder(tetra);
     }
 
+    /**
+     * 随机获得一个tetra，并将nextTetra设为整个tetra
+     */
     public void randomSetNextTetra(){
         Tetra nextTetra = null;
         Random rd = new Random();

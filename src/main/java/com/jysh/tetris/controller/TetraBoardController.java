@@ -13,19 +13,26 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * 控制整个俄罗斯方块游戏的进行
+ * TODO 由于没实现加速下落功能，因此autoMoveDownTime变量显得没必要
+ */
 public class TetraBoardController {
-    public static final int AUTO_DOWN_TIME = 500;
+    public static final int AUTO_DOWN_TIME = 500;       //最初的自动下落时间
 
     private TetraBoard tetraBoard;
 
     private Timer updateUITimer;
     private Timer autoMoveDownTimer;
-    private int autoMoveDownTime;
-    
+    private int autoMoveDownTime;           //当前自动下落时间
+
     KeyAdapter keyProcessor;
     TetrisJPanel tetrisJPanel;
     JFrame tetrisJFrame;
 
+    /**
+     * 开始游戏，重置tetraBoard，启动updateUITimer，autoMoveDownTimer计时器
+     */
     public void start(){
         tetraBoard = new TetraBoard();
         tetrisJPanel.setTetraBoard(tetraBoard);
@@ -34,6 +41,11 @@ public class TetraBoardController {
         updateUITimer.start();
     }
 
+    /**
+     * 初始化
+     * 设置图形绘制
+     * 初始化计时器
+     */
     public void init(){
         tetrisJFrame = new JFrame("tetris");
         tetrisJPanel = new TetrisJPanel();
@@ -56,18 +68,27 @@ public class TetraBoardController {
         this.start();
     }
 
+    /**
+     * 自动下落监听
+     */
     class autoDownActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             tetraBoard.setTetraMoveDown();
         }
     }
 
+    /**
+     * 自动更新ui监听
+     */
     class updateUIActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             tetrisJPanel.updateUI();
         }
     }
 
+    /**
+     * 键盘监听
+     */
     class MyKeyAdapter extends KeyAdapter{
 
         public void keyPressed(KeyEvent ke){

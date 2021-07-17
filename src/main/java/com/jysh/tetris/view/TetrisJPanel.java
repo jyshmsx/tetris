@@ -8,15 +8,18 @@ import java.awt.*;
 import static com.jysh.tetris.model.tetra.Board.BOARD_HEIGHT;
 import static com.jysh.tetris.model.tetra.Board.BOARD_WIDTH;
 
+/**
+ * 绘制俄罗斯方块的ui
+ */
 public class TetrisJPanel extends JPanel {
 
-    public static final int CELL_SIZE = 20;
+    public static final int CELL_SIZE = 20;         //一个格的大小
 
     private static final long serialVersionUID = 1L;
 
     private TetraBoard tetraBoard;
 
-    private static final Color[] allColors = new Color[]{
+    private static final Color[] allColors = new Color[]{       //所有颜色
             Color.gray, Color.red, Color.green, Color.PINK,
             Color.yellow, Color.orange, Color.MAGENTA, Color.BLUE
     };
@@ -25,6 +28,10 @@ public class TetrisJPanel extends JPanel {
         this.tetraBoard = tetraBoard;
     }
 
+    /**
+     * 使用tetraBoard的数值绘制图形
+     * @param g
+     */
     public void paintComponent(Graphics g){
         g.setColor(Color.white);
         g.fillRect(0, 0, BOARD_HEIGHT * CELL_SIZE,BOARD_WIDTH * CELL_SIZE);

@@ -1,5 +1,8 @@
 package com.jysh.tetris.model.tetra;
 
+/**
+ * 下Tetra类，作为model，控制tetra的行为
+ */
 public class Tetra{
     protected Cube [] cubes;        //每个俄罗斯方块
     protected int [][] rotateX;     //四次旋转时，每个Cube.X的相对改变坐标
